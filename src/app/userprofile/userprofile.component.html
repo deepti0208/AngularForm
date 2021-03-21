@@ -1,0 +1,100 @@
+<form class="form-horizontal m-2" [formGroup]="profileForm">
+    <div class="form-group">
+        <label class="control-label col-sm-2">Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+            <span class="error" *ngIf="name.invalid && name.touched">Name is Required</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">LastName:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="lname" placeholder="Enter Last Name">
+            <span class="error" *ngIf="lname.invalid && lname.touched">Last Name is Required</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Email:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="email" placeholder="Enter Email">
+            <span class="error" *ngIf="email.invalid && email.touched">
+                <div *ngIf="email.errors.required">
+                    Email is Required
+                </div>
+                <div *ngIf="email.errors.email">
+                    Email is Invalid
+                </div>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Password:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="password" placeholder="Enter Password">
+            <span class="error" *ngIf="password.invalid && password.touched">Password is Required</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">ConfirmPassword:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="confirmpassword" placeholder="Enter Password">
+            <!-- <span class="error" *ngIf="cpassword.invalid && cpassword.touched">Password is Required</span> -->
+            <div class="error" *ngIf="profileForm.errors?.mismatch && profileForm.touched">
+                Password and Confirm Password Should be Same
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2">Phone:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone No.">
+            <div class="error" *ngIf="phone.invalid && phone.touched">
+                <div *ngIf="phone.errors.required">
+                    Phone is Required
+                </div>
+                <div *ngIf="phone.errors.minlength">
+                    Phone must be atleast 10 digits long
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--p>
+        Form Status :{{profileForm.status}}
+    </p-->
+
+    <div class="form-group" formGroupName="address">
+        <h3>Address</h3>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">City:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="city" placeholder="Enter City">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2">PinCode:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="pincode" placeholder="Enter Pin Code">
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" [disabled]="!profileForm.valid" (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+    <p> Form Values: {{profileForm.value| json}}</p>
+    <p> Form Status: {{profileForm.status | json}}</p>
+
+</form>
